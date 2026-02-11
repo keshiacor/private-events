@@ -1,0 +1,6 @@
+<h1> All Events Attended </h1>
+<ul>
+  <% @user.attended_events.each do |event| %>
+    <li><%= event.name %></li>
+  <% end %>
+</ul>

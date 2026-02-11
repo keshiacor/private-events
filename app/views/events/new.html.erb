@@ -1,0 +1,32 @@
+<div class="form-container">
+  <%= form_with model: @event, class: "event-form" do |form| %>
+    <div class="form-field">
+      <%= form.label :name, "Event Name:" %>
+      <%= form.text_field :name %>
+      <% name_error = @event.errors[:name].first %>
+      <% if name_error.present? %>
+        <p class="field-error"><%= name_error %></p>
+      <% end %>
+    </div>
+    <div class="form-field">
+      <%= form.label :location, "Location:" %>
+      <%= form.text_field :location %>
+      <% location_error = @event.errors[:location].first %>
+      <% if location_error.present? %>
+        <p class="field-error"><%= location_error %></p>
+      <% end %>
+    </div>
+    <div class="form-field">
+      <%= form.label :event_date, "Date of the event:" %>
+      <%= form.date_select :event_date %>
+      <% date_error = @event.errors[:event_date].first %>
+      <% if date_error.present? %>
+        <p class="field-error"><%= date_error %></p>
+      <% end %>
+    </div>
+    <div class="form-submit">
+      <%= form.submit "Create Event" %>
+    </div>
+  <% end %>
+  <%= link_to "Back to homepage", root_path, class: "back-link" %>
+</div>
