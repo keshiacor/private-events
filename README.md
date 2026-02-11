@@ -56,6 +56,7 @@ Visit `http://localhost:3000` and sign up for an account to start creating event
 - Users can attend events.
 - An event has multiple attendees.
 - An event has a date and a location displayed as a string.
+- Authentication system for users to sign up and log in using Devise.
 
 ## Important Dependencies
 
