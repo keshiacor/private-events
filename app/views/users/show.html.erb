@@ -4,3 +4,5 @@
     <li><%= event.name %></li>
   <% end %>
 </ul>
+
+<%= button_to "Logout", destroy_user_session_path, method: :delete %>
