@@ -1,5 +1,18 @@
+<% flash.each do |type, msg| %>
+  <div>
+    <%= msg %>
+  </div>
+<% end %>
+
 <h1>Event Details</h1>
 <p><strong>Name:</strong> <%= @event.name %></p>
 <p><strong>Location:</strong> <%= @event.location %></p>
 <p><strong>Date:</strong> <%= @event.event_date %></p>
 <p><strong>Created by:</strong> <%= @event.creator.email %></p>
+
+<% if user_signed_in? && !current_user.attended_events.exists?(@event.id) %>
+  <%= form_with model: Attendance.new, url: attendances_path, local: true do |f| %>
+    <%= f.hidden_field :attended_event_id, value: @event.id %>
+    <%= f.submit "Attend This Event" %>
+  <% end %>
+<% end %>
