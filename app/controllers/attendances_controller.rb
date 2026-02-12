@@ -5,8 +5,7 @@ class AttendancesController < ApplicationController
     @attendance = current_user.attendances.build(attendance_params)
 
     if @attendance.save
-      redirect_to event_path(@attendance.attended_event), notice: "You've successfully registered for this event."
-
+      redirect_to event_path(@attendance.attended_event), notice: "You've successfully registered for this event!"
     else
       redirect_back fallback_location: events_path, alert: @attendance.errors.full_messages.to_sentence, status: :unprocessable_entity
     end
