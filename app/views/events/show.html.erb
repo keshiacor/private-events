@@ -15,4 +15,6 @@
     <%= f.hidden_field :attended_event_id, value: @event.id %>
     <%= f.submit "Attend This Event" %>
   <% end %>
-<% end %>
+<% end %> 
+
+<h2>Attendees:</h2> <ul> <% @event.attendees.each do |attendee| %> <li><%= attendee.email %> </li> <% end %> </ul>
