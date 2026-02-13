@@ -1,8 +1,17 @@
-<h1> All Events Attended </h1>
+<h1> All Events </h1>
+<h2> Upcoming Events </h2>
 <ul>
-  <% @user.attended_events.each do |event| %>
+  <% @user.attended_events.where("event_date >= ?", Date.today).each do |event| %>
     <li><%= event.name %></li>
   <% end %>
+</ul>
+
+
+<h2> Past Events </h2>
+<ul>
+ <% @user.attended_events.where("event_date < ?", Date.today).each do |event| %>
+    <li><%= event.name %></li>
+ <% end %>
 </ul>
 
 <%= button_to "Logout", destroy_user_session_path, method: :delete %>
