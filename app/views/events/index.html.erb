@@ -1,19 +1,32 @@
-<h1> All Events </h1>
+<h1>All Events</h1>
 
-<h2> Upcoming Events </h2>
-<ul>
+<div  style="display:flex; justify-content:flex-end; margin-top:1rem;">
+  <%= button_to "Create New Event", new_event_path, method: :get, class: "btn" %>
+</div> 
+
+<h2>Upcoming Events</h2>
+<section class="events-grid" aria-label="Upcoming events">
   <% @events.upcoming.each do |event| %>
-    <li><%= link_to event.name, event_path(event) %> - <%= event.event_date.strftime("%B %d, %Y %H:%M") %></li>
+    <article class="event-card" aria-labelledby="event-<%= event.id %>-title">
+      <div class="event-date-badge" aria-hidden="true"><span class="badge-month"><%= event.event_date.strftime("%b") %></span><span class="badge-day"><%= event.event_date.strftime("%d") %></span></div>
+      <div class="event-card-body">
+        <h3 id="event-<%= event.id %>-title" class="event-title"><%= link_to event.name, event_path(event) %></h3>
+        <p class="event-meta"><%= event.location %> • <%= event.event_date.strftime("%B %d, %Y") %></p>
+      </div>
+    </article>
   <% end %>
-</ul>
+</section>
 
-<h2> Past Events </h2>
-<ul>
+<h2>Past Events</h2>
+<section class="events-grid" aria-label="Past events">
   <% @events.past.each do |event| %>
-    <li><%= link_to event.name, event_path(event) %> - <%= event.event_date.strftime("%B %d, %Y %H:%M") %></li>
+    <article class="event-card" aria-labelledby="event-<%= event.id %>-title">
+      <div class="event-date-badge" aria-hidden="true"><span class="badge-month"><%= event.event_date.strftime("%b") %></span><span class="badge-day"><%= event.event_date.strftime("%d") %></span></div>
+      <div class="event-card-body">
+        <h3 id="event-<%= event.id %>-title" class="event-title"><%= link_to event.name, event_path(event) %></h3>
+        <p class="event-meta"><%= event.location %> • <%= event.event_date.strftime("%B %d, %Y") %></p>
+      </div>
+    </article>
   <% end %>
-</ul>
+</section>
 
-<button>
-  <%= link_to "Create New Event", new_event_path %>
-</button>
