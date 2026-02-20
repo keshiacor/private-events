@@ -8,3 +8,32 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Centered main navigation */
+.main-nav {
+	background: #f8f9fa;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.main-nav .nav-inner {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	padding: 1rem 0;
+}
+.nav-link {
+	color: #222;
+	text-decoration: none;
+	font-weight: 600;
+	background: transparent;
+	border: none;
+	padding: 0.25rem 0.5rem;
+}
+.nav-link:hover,
+.nav-link:focus {
+	text-decoration: underline;
+}
+.logout-btn {
+	background: transparent;
+	cursor: pointer;
+}
+
