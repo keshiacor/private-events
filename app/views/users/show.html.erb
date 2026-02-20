@@ -1,4 +1,4 @@
-<h1> All Events </h1>
+<h1> Your Events </h1>
 <h2> Upcoming Events </h2>
 <ul>
   <% @user.attended_events.where("event_date >= ?", Date.today).each do |event| %>
