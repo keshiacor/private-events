@@ -4,19 +4,35 @@
   </div>
 <% end %>
 
-<h1>Event Details</h1>
-<p><strong>Name:</strong> <%= @event.name %></p>
-<p><strong>Location:</strong> <%= @event.location %></p>
-<p><strong>Date:</strong> <%= @event.event_date %></p>
-<p><strong>Created by:</strong> <%= @event.creator.email %></p>
+<div class="event-details-panel" role="region" aria-label="Event details">
+  <h1>Event Details</h1>
+  <p class="detail-line"><strong>Name:</strong> <span class="detail-value"><%= @event.name %></span></p>
+  <p class="detail-line"><strong>Location:</strong> <span class="detail-value"><%= @event.location %></span></p>
+  <p class="detail-line"><strong>Date:</strong> <span class="detail-value"><%= @event.event_date.strftime("%B %d, %Y %H:%M") %></span></p>
+  <p class="detail-line"><strong>Created by:</strong> <span class="detail-value"><%= @event.creator.email %></span></p>
 
-<% if user_signed_in? && !current_user.attended_events.exists?(@event.id) %>
-  <%= form_with model: Attendance.new, url: attendances_path, local: true do |f| %>
-    <%= f.hidden_field :attended_event_id, value: @event.id %>
-    <%= f.submit "Attend This Event" %>
+  <% if user_signed_in? && !current_user.attended_events.exists?(@event.id) %>
+    <div class="form-actions" style="justify-content:center; margin-top:1rem;">
+      <%= form_with model: Attendance.new, url: attendances_path, local: true, html: { role: 'form', 'aria-label': 'Attend event form' } do |f| %>
+        <%= f.hidden_field :attended_event_id, value: @event.id %>
+        <%= f.submit "Attend This Event", class: "form-submit-btn" %>
+      <% end %>
+    </div>
   <% end %>
-<% end %> 
+</div>
 
-<h2>Attendees:</h2> <ul> <% @event.attendees.each do |attendee| %> <li><%= attendee.email %> </li> <% end %> </ul>
-
-<%= link_to "Back to homepage", root_path, class: "back-link" %>
+<section class="attendees-list" aria-label="Attendees">
+  <h2>Attendees</h2>
+  <% if @event.attendees.any? %>
+    <% @event.attendees.each do |attendee| %>
+      <div class="attendee-item" role="listitem" aria-label="Attendee">
+        <div class="attendee-avatar" aria-hidden="true"><%= attendee.email[0].upcase %></div>
+        <div class="attendee-info">
+          <div class="attendee-name"><%= attendee.email %></div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="muted">No attendees yet.</p>
+  <% end %>
+</section>

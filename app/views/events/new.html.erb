@@ -1,8 +1,9 @@
-<div class="form-container">
-  <%= form_with model: @event, class: "event-form" do |form| %>
+<div class="form-container" role="region" aria-label="Create event">
+  <h1>Create Event</h1>
+  <%= form_with model: @event, class: "event-form", html: { role: "form", 'aria-label': 'Create event form' } do |form| %>
     <div class="form-field">
       <%= form.label :name, "Event Name:" %>
-      <%= form.text_field :name %>
+      <%= form.text_field :name, class: "form-input", 'aria-label': 'Event name' %>
       <% name_error = @event.errors[:name].first %>
       <% if name_error.present? %>
         <p class="field-error"><%= name_error %></p>
@@ -10,7 +11,7 @@
     </div>
     <div class="form-field">
       <%= form.label :location, "Location:" %>
-      <%= form.text_field :location %>
+      <%= form.text_field :location, class: "form-input", 'aria-label': 'Location' %>
       <% location_error = @event.errors[:location].first %>
       <% if location_error.present? %>
         <p class="field-error"><%= location_error %></p>
@@ -24,9 +25,9 @@
         <p class="field-error"><%= date_error %></p>
       <% end %>
     </div>
-    <div class="form-submit">
-      <%= form.submit "Create Event" %>
+    <div class="form-actions">
+      <%= form.submit "Create Event", class: "form-submit-btn" %>
     </div>
   <% end %>
-  <%= link_to "Back to homepage", root_path, class: "back-link" %>
+</div>
 </div>

@@ -11,8 +11,26 @@
 
 /* Centered main navigation */
 .main-nav {
-	background: #f8f9fa;
-	border-bottom: 1px solid rgba(0,0,0,0.05);
+		background: #f8f9fa;
+		border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+:root {
+	--sand-50: #fbf7f2;
+	--sand-100: #f6efe6;
+	--sand-300: #e7d7be;
+	--sand-500: #d8c3a5;
+	--accent-500: #b76e3b;
+	--accent-700: #8a4b2d;
+	--muted-900: #2b2a28;
+	--muted-700: #5b4b3a;
+	--focus-ring: rgba(183,110,59,0.16);
+}
+
+body {
+	background: var(--sand-50);
+	color: var(--muted-900);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
 }
 .main-nav .nav-inner {
 	display: flex;
@@ -21,19 +39,330 @@
 	padding: 1rem 0;
 }
 .nav-link {
-	color: #222;
+	color: var(--muted-700);
 	text-decoration: none;
-	font-weight: 600;
+	font-weight: 700;
 	background: transparent;
 	border: none;
 	padding: 0.25rem 0.5rem;
 }
 .nav-link:hover,
 .nav-link:focus {
+	color: var(--accent-700);
 	text-decoration: underline;
 }
 .logout-btn {
 	background: transparent;
 	cursor: pointer;
 }
+
+/* Form layout and controls */
+.form-container,
+.form-panel {
+	max-width: 480px;
+	margin: 2.5rem auto;
+	padding: 1.25rem 1.25rem;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+	border: 1px solid var(--sand-300);
+}
+.form-container h1,
+.form-panel h1 {
+	margin: 0 0 1rem 0;
+	font-size: 1.25rem;
+	text-align: center;
+}
+.form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-bottom: 0.85rem;
+}
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+  margin: 0;
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: 0 0 auto;
+}
+.checkbox-label .label-text {
+  line-height: 1;
+}
+label {
+	font-weight: 600;
+	font-size: 0.95rem;
+}
+.form-input,
+textarea,
+select {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.6rem 0.75rem;
+	border: 1px solid var(--sand-300);
+	border-radius: 6px;
+	font-size: 1rem;
+	background: #fff;
+}
+.form-input:focus,
+textarea:focus,
+select:focus {
+	outline: 3px solid var(--focus-ring);
+	border-color: var(--accent-500);
+}
+.form-actions {
+	display: flex;
+	justify-content: center;
+	gap: 0.75rem;
+	margin-top: 0.5rem;
+}
+.form-submit-btn,
+.btn {
+	appearance: none;
+	-webkit-appearance: none;
+	padding: 0.5rem 0.9rem;
+	border-radius: 6px;
+	border: 1px solid rgba(0,0,0,0.06);
+	background: var(--accent-500);
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+.form-submit-btn.secondary {
+	background: transparent;
+	color: var(--accent-500);
+	border: 1px solid var(--accent-500);
+}
+.field-error {
+	color: #c53030;
+	font-size: 0.9rem;
+}
+
+/* Small utilities */
+.back-link {
+	display: inline-block;
+	margin-top: 0.75rem;
+	color: var(--accent-500);
+}
+
+/* Generic rules to catch common Devise / auth forms that may not have wrappers */
+form[action*="/users"], form.new_user, form.edit_user {
+	max-width: 480px;
+	margin: 2.25rem auto;
+	padding: 1rem;
+}
+form[action*="/users"] input,
+form[action*="/users"] select,
+form[action*="/users"] textarea {
+	padding: 0.6rem 0.75rem;
+	border-radius: 6px;
+		border: 1px solid var(--sand-300);
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/* Events card grid */
+.events-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.9rem;
+	margin: 0.6rem 0 1.25rem 0;
+}
+.event-card {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	background: linear-gradient(180deg, #ffffff, var(--sand-50));
+	border: 1px solid rgba(0,0,0,0.04);
+	padding: 0.9rem;
+	border-radius: 8px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.event-date-badge {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 56px;
+	min-height: 56px;
+	padding: 0.35rem 0.45rem;
+	border-radius: 8px;
+	background: var(--sand-300);
+	color: var(--muted-900);
+	font-weight: 700;
+}
+.event-date-badge .badge-month {
+	display: block;
+	font-size: 0.75rem;
+	text-transform: uppercase;
+	opacity: 0.9;
+}
+.event-date-badge .badge-day {
+	display: block;
+	font-size: 1.25rem;
+	line-height: 1;
+}
+.event-card-body {
+	flex: 1 1 auto;
+}
+.event-title {
+	margin: 0 0 0.25rem 0;
+	font-size: 1rem;
+}
+.event-meta {
+	margin: 0;
+	color: var(--muted-700);
+	font-size: 0.95rem;
+}
+
+@media (min-width: 720px) {
+	.events-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+	.event-card {
+		align-items: flex-start;
+	}
+}
+
+/* Event details & attendees */
+.event-details-panel {
+	max-width: 680px;
+	margin: 1.25rem auto;
+	padding: 1rem 1.25rem;
+	background: linear-gradient(180deg,#fff,var(--sand-50));
+	border: 1px solid rgba(0,0,0,0.04);
+	border-radius: 8px;
+	text-align: center;
+}
+.event-details-panel .detail-line {
+	margin: 0.45rem 0;
+}
+.event-details-panel .detail-value {
+	color: var(--muted-700);
+	margin-left: 0.35rem;
+	font-weight: 600;
+}
+.attendees-list {
+	max-width: 680px;
+	margin: 1rem auto 2rem auto;
+	display: grid;
+	gap: 0.6rem;
+}
+.attendee-item {
+	display: flex;
+	gap: 0.75rem;
+	align-items: center;
+	padding: 0.6rem;
+	border-radius: 8px;
+	background: #fff;
+	border: 1px solid rgba(0,0,0,0.03);
+}
+.attendee-avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 6px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--sand-300);
+	color: var(--muted-900);
+	font-weight: 700;
+}
+.attendee-info .attendee-name {
+	font-weight: 600;
+	color: var(--muted-900);
+}
+.muted {
+	color: var(--muted-700);
+}
+
+/* Responsive adjustments: mobile-first then scale up */
+@media (max-width: 479px) {
+	/* Nav stacks for small screens */
+	.main-nav {
+		background: var(--sand-100);
+	}
+	.main-nav .nav-inner {
+		flex-direction: column;
+		gap: 0;
+		padding: 0.25rem 0;
+	}
+	.nav-link {
+		display: block;
+		width: 100%;
+		padding: 0.6rem 0;
+		text-align: center;
+		border-top: 1px solid rgba(0,0,0,0.03);
+		background: transparent;
+	}
+
+	/* Forms are full width and compact */
+	.form-container, .form-panel, form[action*="/users"] {
+		margin: 1rem 0.75rem;
+		padding: 0.9rem;
+	}
+	.form-input {
+		font-size: 1rem;
+		padding: 0.55rem 0.6rem;
+	}
+	.form-actions {
+		flex-direction: column;
+		gap: 0.5rem;
+		align-items: stretch;
+	}
+	.form-submit-btn {
+		width: 100%;
+	}
+
+	/* Event cards: tighten spacing and make badge smaller */
+	.events-grid { gap: 0.6rem; margin: 0.5rem 0; }
+	.event-card { padding: 0.6rem; gap: 0.6rem; }
+	.event-date-badge { min-width: 44px; min-height: 44px; padding: 0.25rem; }
+	.event-date-badge .badge-day { font-size: 1.05rem; }
+
+	/* Attendee list compact */
+	.attendees-list { margin: 0.5rem 0.75rem; }
+	.attendee-item { padding: 0.5rem; }
+	.attendee-avatar { width: 40px; height: 40px; }
+}
+
+@media (min-width: 480px) and (max-width: 719px) {
+	/* Slightly larger phones / small tablets */
+	.main-nav .nav-inner { flex-direction: row; flex-wrap: wrap; gap: 0.5rem; }
+	.nav-link { padding: 0.45rem 0.6rem; }
+
+	.form-container, .form-panel { margin: 1.25rem 1rem; padding: 1rem; }
+	.form-actions { flex-direction: row; gap: 0.6rem; }
+	.form-submit-btn { width: auto; }
+
+	.events-grid { gap: 0.75rem; }
+	.event-card { padding: 0.75rem; }
+	.event-date-badge { min-width: 48px; min-height: 48px; }
+
+	.attendees-list { margin: 0.75rem 1rem; }
+	.attendee-avatar { width: 42px; height: 42px; }
+}
+
+@media (min-width: 720px) and (max-width: 1023px) {
+	/* Small laptops / tablets: keep two-column grid */
+	.events-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+	.event-card { padding: 0.9rem; }
+	.event-date-badge { min-width: 56px; min-height: 56px; }
+	.form-container { margin: 1.75rem auto; }
+}
+
+@media (min-width: 1024px) {
+	/* Wider screens: allow three-column event grid */
+	.events-grid { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+	.event-card { padding: 1rem; }
+	.event-date-badge { min-width: 64px; min-height: 64px; }
+	.form-container { max-width: 640px; }
+}
+
+
 
