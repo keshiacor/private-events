@@ -1,4 +1,19 @@
 <h1> All Events </h1>
+
+<h2> Upcoming Events </h2>
+<ul>
+  <% @events.upcoming.each do |event| %>
+    <li><%= link_to event.name, event_path(event) %> - <%= event.event_date.strftime("%B %d, %Y %H:%M") %></li>
+  <% end %>
+</ul>
+
+<h2> Past Events </h2>
+<ul>
+  <% @events.past.each do |event| %>
+    <li><%= link_to event.name, event_path(event) %> - <%= event.event_date.strftime("%B %d, %Y %H:%M") %></li>
+  <% end %>
+</ul>
+
 <button>
   <%= link_to "Create New Event", new_event_path %>
 </button>
