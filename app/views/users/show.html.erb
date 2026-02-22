@@ -2,7 +2,7 @@
 
 <h2>Upcoming Events</h2>
 <section class="events-grid" aria-label="Your upcoming events">
-  <% @user.attended_events.where("event_date >= ?", Date.today).each do |event| %>
+  <% @accessible_events.where("event_date >= ?", Date.today).each do |event| %>
     <article class="event-card" aria-labelledby="user-event-<%= event.id %>-title">
       <div class="event-date-badge" aria-hidden="true"><span class="badge-month"><%= event.event_date.strftime("%b") %></span><span class="badge-day"><%= event.event_date.strftime("%d") %></span></div>
       <div class="event-card-body">
@@ -16,7 +16,7 @@
 
 <h2>Past Events</h2>
 <section class="events-grid" aria-label="Your past events">
-  <% @user.attended_events.where("event_date < ?", Date.today).each do |event| %>
+  <% @accessible_events.where("event_date < ?", Date.today).each do |event| %>
     <article class="event-card" aria-labelledby="user-event-<%= event.id %>-title">
       <div class="event-date-badge" aria-hidden="true"><span class="badge-month"><%= event.event_date.strftime("%b") %></span><span class="badge-day"><%= event.event_date.strftime("%d") %></span></div>
       <div class="event-card-body">
