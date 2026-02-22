@@ -289,6 +289,29 @@ form[action*="/users"] textarea {
   display: block;
   margin: 1rem auto 0 auto;
 }
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+.toast {
+  background: #333;
+  color: white;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.toast.notice { background: #4caf50; }
+.toast.alert { background: #f44336; }
+
+.toast.fade-out {
+  opacity: 0;
+}
 
 /* Responsive adjustments: mobile-first then scale up */
 @media (max-width: 479px) {

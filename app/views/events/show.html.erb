@@ -1,8 +1,10 @@
-<% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-<% end %>
+<div id="toast-container">
+  <% flash.each do |type, message| %>
+    <div class="toast <%= type %>" data-controller="toast">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
 
 <div class="event-details-panel" role="region" aria-label="Event details">
   <% if user_signed_in? && @event.creator == current_user %>

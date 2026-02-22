@@ -1,3 +1,10 @@
+<div id="toast-container">
+  <% flash.each do |type, message| %>
+    <div class="toast <%= type %>" data-controller="toast">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
 <h1>All Events</h1>
 
 <div  style="display:flex; justify-content:flex-end; margin-top:1rem;">
