@@ -28,7 +28,7 @@
   <p class="detail-line"><strong>Date:</strong> <span class="detail-value"><%= @event.event_date.strftime("%B %d, %Y %H:%M") %></span></p>
   <p class="detail-line"><strong>Created by:</strong> <span class="detail-value"><%= @event.creator.email %></span></p>
 
-  <% if user_signed_in? && !current_user.attended_events.exists?(@event.id) %>
+  <% if user_signed_in? && !current_user.attended_events.exists?(@event.id) && @event.creator != current_user %>
     <div class="form-actions" style="justify-content:center; margin-top:1rem;">
       <%= form_with model: Attendance.new, url: attendances_path, local: true, html: { role: 'form', 'aria-label': 'Attend event form' } do |f| %>
         <%= f.hidden_field :attended_event_id, value: @event.id %>
@@ -36,7 +36,16 @@
       <% end %>
     </div>
   <% end %>
-</div>
+  <% if user_signed_in? && current_user.attended_events.exists?(@event.id) && @event.creator != current_user %>
+    <div class="form-actions" style="justify-content:center; margin-top:1rem;">
+      <%= button_to "Cancel My Attendance", attendance_path(current_user.attendances.find_by(attended_event_id: @event.id)), 
+          method: :delete, 
+          data: { confirm: "Are you sure you want to cancel your attendance?" },
+          class: "btn-secondary",
+          style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+    </div>
+  <% end%>
+
 
 <% if user_signed_in? && @event.creator == current_user %>
   <section class="invitations-section"  style="margin-top: 2rem;">
