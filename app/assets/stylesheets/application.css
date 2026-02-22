@@ -247,7 +247,7 @@ form[action*="/users"] textarea {
 	margin-left: 0.35rem;
 	font-weight: 600;
 }
-.attendees-list {
+.attendees-list, .invitations-section {
 	max-width: 680px;
 	margin: 1rem auto 2rem auto;
 	display: grid;
@@ -279,6 +279,10 @@ form[action*="/users"] textarea {
 }
 .muted {
 	color: var(--muted-700);
+}
+.invitations-section {
+  max-width: 680px;
+  margin: 1rem auto 2rem auto;
 }
 .invitations-section h2, .invitations-section p{
   margin: 1.5rem 0 0.75rem 0;
@@ -358,7 +362,7 @@ form[action*="/users"] textarea {
 	.event-date-badge .badge-day { font-size: 1.05rem; }
 
 	/* Attendee list compact */
-	.attendees-list { margin: 0.5rem 0.75rem; }
+	.attendees-list, .invited-users-list { margin: 0.5rem 0.75rem; }
 	.attendee-item { padding: 0.5rem; }
 	.attendee-avatar { width: 40px; height: 40px; }
 }
