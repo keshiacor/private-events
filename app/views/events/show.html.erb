@@ -5,6 +5,21 @@
 <% end %>
 
 <div class="event-details-panel" role="region" aria-label="Event details">
+  <% if user_signed_in? && @event.creator == current_user %>
+    <div class="event-actions" style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-bottom: 1rem;">
+      <%= button_to "Edit", edit_event_path(@event), class: "btn-secondary",
+      method: :get,
+      data: { confirm: "Are you sure you want to edit this event?" },
+      style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+
+      <%= button_to "Delete", event_path(@event), 
+          method: :delete, 
+          data: { confirm: "Are you sure you want to delete this event?" },
+          class: "btn-secondary",
+          style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+    </div>
+  <% end %>
+
   <h1>Event Details</h1>
   <p class="detail-line"><strong>Name:</strong> <span class="detail-value"><%= @event.name %></span></p>
   <p class="detail-line"><strong>Location:</strong> <span class="detail-value"><%= @event.location %></span></p>
@@ -23,8 +38,6 @@
 
 <% if user_signed_in? && @event.creator == current_user %>
   <section class="invitations-section" aria-label="Manage Invitations" style="margin-top: 2rem;">
-    <h2>Invite Users</h2>
-    
     <% if @available_users&.any? %>
       <div class="form-actions">
         <%= form_with url: event_invitations_path(@event), method: :post, local: true, html: { role: 'form', 'aria-label': 'Invite user form' } do |f| %>

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_event, only: [ :show, :destroy ]
+  before_action :set_event, only: [ :show, :destroy, :edit, :update ]
   before_action :authorize_accessing_event, only: [ :show ]
 
   def index
@@ -29,7 +29,21 @@ class EventsController < ApplicationController
     end
   end
 
+  def edit
+    @event = Event.find(params[:id])
+    unless @event.creator == current_user
+      redirect_to events_path, alert: "Only the event creator can edit this event."
+    end
+  end
+
   def update
+    if @event.creator == current_user
+      if @event.update(event_params)
+        redirect_to @event, notice: "Event was successfully updated."
+      else
+        render :edit, status: :unprocessable_entity
+      end
+    end
   end
 
   def destroy
