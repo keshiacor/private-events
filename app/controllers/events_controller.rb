@@ -64,7 +64,7 @@ class EventsController < ApplicationController
 
   def authorize_accessing_event
     unless access_allowed?(@event)
-      redirect_to events_path, alert: "You are not authorized to view this event."
+      redirect_back fallback_location: events_path, alert: "You are not authorized to view this event."
     end
   end
 
