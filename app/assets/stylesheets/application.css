@@ -280,6 +280,15 @@ form[action*="/users"] textarea {
 .muted {
 	color: var(--muted-700);
 }
+.invitations-section h2, .invitations-section p{
+  margin: 1.5rem 0 0.75rem 0;
+  font-size: 2 rem;
+  text-align: center;
+}
+.invitations-section .form-submit-btn{
+  display: block;
+  margin: 1rem auto 0 auto;
+}
 
 /* Responsive adjustments: mobile-first then scale up */
 @media (max-width: 479px) {

@@ -21,6 +21,52 @@
   <% end %>
 </div>
 
+<% if user_signed_in? && @event.creator == current_user %>
+  <section class="invitations-section" aria-label="Manage Invitations" style="margin-top: 2rem;">
+    <h2>Invite Users</h2>
+    
+    <% if @available_users&.any? %>
+      <div class="form-actions">
+        <%= form_with url: event_invitations_path(@event), method: :post, local: true, html: { role: 'form', 'aria-label': 'Invite user form' } do |f| %>
+          <div class="form-group">
+            <%= f.label :user_id, "Select a user to invite:", class: "form-label" %>
+            <%= f.select :user_id, 
+                options_from_collection_for_select(@available_users, :id, :email), 
+                { prompt: 'Choose a user...' },
+                { class: "form-input", required: true } %>
+          </div>
+          <%= f.submit "Send Invitation", class: "form-submit-btn" %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted">All users have been invited to this event.</p>
+    <% end %>
+
+    <% if @event.invited_users.any? %>
+      <h3 style="margin-top: 2rem;">Invited Users</h3>
+      <div class="invited-users-list">
+        <% @event.invitations.includes(:user).each do |invitation| %>
+          <div class="attendee-item" role="listitem" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center;">
+              <div class="attendee-avatar" aria-hidden="true"><%= invitation.user.email[0].upcase %></div>
+              <div class="attendee-info">
+                <div class="attendee-name"><%= invitation.user.email %></div>
+              </div>
+            </div>
+            <%= button_to "Remove", event_invitation_path(@event, invitation), 
+                method: :delete, 
+                data: { confirm: "Are you sure you want to remove this invitation?" },
+                class: "btn-secondary",
+                style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted" style="margin-top: 1rem;">No users invited yet.</p>
+    <% end %>
+  </section>
+<% end %>
+
 <section class="attendees-list" aria-label="Attendees">
   <h2>Attendees</h2>
   <% if @event.attendees.any? %>
