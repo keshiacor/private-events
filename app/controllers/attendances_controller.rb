@@ -1,7 +1,9 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_event, only: [ :create ]
+  before_action :set_attendance, only: [ :destroy ]
   before_action :authorize_event_access, only: [ :create ]
+  before_action :authorize_attendance_cancellation, only: [ :destroy ]
 
   def create
     @attendance = current_user.attendances.build(attendance_params)
@@ -13,7 +15,11 @@ class AttendancesController < ApplicationController
     end
   end
 
-  # TODO: add a destroy action so users can unattend events by adding a cancel attendance button on the event show page that only appears if the user is already marked as attending the event. This destroy action should find the attendance by the current_user and the event id and then destroy that attendance record.
+  def destroy
+    event = @attendance.attended_event
+    @attendance.destroy
+    redirect_to event_path(event), notice: "You've successfully cancelled your attendance."
+  end
 
   private
 
@@ -21,9 +27,19 @@ class AttendancesController < ApplicationController
     @event = Event.find(params[:attendance][:attended_event_id])
   end
 
+  def set_attendance
+    @attendance = current_user.attendances.find(params[:id])
+  end
+
   def authorize_event_access
     unless can_access_event?(@event)
       redirect_to events_path, alert: "You don't have access to this event."
+    end
+  end
+
+  def authorize_attendance_cancellation
+    if @attendance.attended_event.creator == current_user
+      redirect_back fallback_location: events_path, alert: "Event creators cannot cancel their attendance."
     end
   end
 
