@@ -67,7 +67,7 @@
     <% end %>
 
     <% if @event.invited_users.any? %>
-      <h2 style="margin-top: 2rem; text-align: left;">Invited Users</h2>
+      <h2 style="margin-top: 2rem; text-align: center;">Invited Users</h2>
       <div class="invited-users-list">
         <% @event.invitations.includes(:user).each do |invitation| %>
           <div class="attendee-item" role="listitem" aria-label="Invited User" style="display: flex; ">

@@ -1,6 +1,6 @@
-<h1>Your Events</h1>
+<h1>Hi <%= current_user.email %> 👋🏽, here are your events</h1>
 
-<h2>Upcoming Events</h2>
+<h2>My Upcoming Events</h2>
 <section class="events-grid" aria-label="Your upcoming events">
   <% @accessible_events.where("event_date >= ?", Date.today).each do |event| %>
     <article class="event-card" aria-labelledby="user-event-<%= event.id %>-title">
@@ -14,7 +14,7 @@
 </section>
 
 
-<h2>Past Events</h2>
+<h2>My Past Events</h2>
 <section class="events-grid" aria-label="Your past events">
   <% @accessible_events.where("event_date < ?", Date.today).each do |event| %>
     <article class="event-card" aria-labelledby="user-event-<%= event.id %>-title">

@@ -18,8 +18,8 @@
       <% end %>
     </div>
     <div class="form-field">
-      <%= form.label :event_date, "Date of the event:" %>
-      <%= form.date_select :event_date %>
+      <%= form.label :event_date, "Date and Time of the event:" %>
+      <%= form.datetime_select :event_date %>
       <% date_error = @event.errors[:event_date].first %>
       <% if date_error.present? %>
         <p class="field-error"><%= date_error %></p>

@@ -11,8 +11,13 @@
 
 /* Centered main navigation */
 .main-nav {
-		background: #f8f9fa;
-		border-bottom: 1px solid rgba(0,0,0,0.05);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: #64a8eb;
+	border-bottom: 1px solid rgba(0,0,0,0.05);
+	z-index: 1000;
 }
 
 :root {
@@ -31,12 +36,14 @@ body {
 	background: var(--sand-50);
 	color: var(--muted-900);
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+	padding-top: 160px;
 }
 .main-nav .nav-inner {
 	display: flex;
-	justify-content: center;
-	gap: 1rem;
-	padding: 1rem 0;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 2rem;
+	padding: 1rem 2rem;
 }
 .nav-link {
 	color: var(--muted-700);
@@ -54,6 +61,33 @@ body {
 .logout-btn {
 	background: transparent;
 	cursor: pointer;
+}
+.nav-logo-link {
+	display: inline-flex;
+	align-items: center;
+	margin-right: auto;
+}
+.nav-logo {
+	height: 120px;
+	width: auto;
+	border-radius: 16px;
+}
+body.logged-out {
+	background-image: url('eventHaven.png');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+body.logged-out::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.85);
+	z-index: -1;
 }
 
 /* Form layout and controls */
