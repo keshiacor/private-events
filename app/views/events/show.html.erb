@@ -1,0 +1,109 @@
+<div id="toast-container">
+  <% flash.each do |type, message| %>
+    <div class="toast <%= type %>" data-controller="toast">
+      <%= message %>
+    </div>
+  <% end %>
+</div>
+
+<div class="event-details-panel" role="region" aria-label="Event details">
+  <% if user_signed_in? && @event.creator == current_user %>
+    <div class="event-actions" style="display: flex; justify-content: flex-end; gap: 0.5rem; margin-bottom: 1rem;">
+      <%= button_to "Edit", edit_event_path(@event), class: "btn-secondary",
+      method: :get,
+      data: { confirm: "Are you sure you want to edit this event?" },
+      style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+
+      <%= button_to "Delete", event_path(@event), 
+          method: :delete, 
+          data: { confirm: "Are you sure you want to delete this event?" },
+          class: "btn-secondary",
+          style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+    </div>
+  <% end %>
+
+  <h1>Event Details</h1>
+  <p class="detail-line"><strong>Name:</strong> <span class="detail-value"><%= @event.name %></span></p>
+  <p class="detail-line"><strong>Location:</strong> <span class="detail-value"><%= @event.location %></span></p>
+  <p class="detail-line"><strong>Date:</strong> <span class="detail-value"><%= @event.event_date.strftime("%B %d, %Y %H:%M") %></span></p>
+  <p class="detail-line"><strong>Created by:</strong> <span class="detail-value"><%= @event.creator.email %></span></p>
+
+  <% if user_signed_in? && !current_user.attended_events.exists?(@event.id) && @event.creator != current_user %>
+    <div class="form-actions" style="justify-content:center; margin-top:1rem;">
+      <%= form_with model: Attendance.new, url: attendances_path, local: true, html: { role: 'form', 'aria-label': 'Attend event form' } do |f| %>
+        <%= f.hidden_field :attended_event_id, value: @event.id %>
+        <%= f.submit "Attend This Event", class: "form-submit-btn" %>
+      <% end %>
+    </div>
+  <% end %>
+  <% if user_signed_in? && current_user.attended_events.exists?(@event.id) && @event.creator != current_user %>
+    <div class="form-actions" style="justify-content:center; margin-top:1rem;">
+      <%= button_to "Cancel My Attendance", attendance_path(current_user.attendances.find_by(attended_event_id: @event.id)), 
+          method: :delete, 
+          data: { confirm: "Are you sure you want to cancel your attendance?" },
+          class: "btn-secondary",
+          style: "padding: 0.5rem 1rem; font-size: 0.9rem;" %>
+    </div>
+  <% end%>
+
+
+<% if user_signed_in? && @event.creator == current_user %>
+  <section class="invitations-section"  style="margin-top: 2rem;">
+    <% if @available_users&.any? %>
+      <div class="form-actions">
+        <%= form_with url: event_invitations_path(@event), method: :post, local: true, html: { role: 'form', 'aria-label': 'Invite user form' } do |f| %>
+          <div class="form-group">
+            <%= f.label :user_id, "Select a user to invite:", class: "form-label" %>
+            <%= f.select :user_id, 
+                options_from_collection_for_select(@available_users, :id, :email), 
+                { prompt: 'Choose a user...' },
+                { class: "form-input", required: true } %>
+          </div>
+          <%= f.submit "Send Invitation", class: "form-submit-btn" %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted">All users have been invited to this event.</p>
+    <% end %>
+
+    <% if @event.invited_users.any? %>
+      <h2 style="margin-top: 2rem; text-align: center;">Invited Users</h2>
+      <div class="invited-users-list">
+        <% @event.invitations.includes(:user).each do |invitation| %>
+          <div class="attendee-item" role="listitem" aria-label="Invited User" style="display: flex; ">
+            
+              <div class="attendee-avatar" aria-hidden="true"> <%= invitation.user.email[0].upcase %></div>
+              <div class="attendee-info">
+                <div class="attendee-name"><%= invitation.user.email %></div>
+              </div>
+            <div style="margin-left: auto;">
+            <%= button_to "Remove", event_invitation_path(@event, invitation), 
+                method: :delete, 
+                data: { confirm: "Are you sure you want to remove this invitation?" },
+                class: "btn-secondary",
+                style: "padding: 0.5rem 1rem; font-size: 0.9rem; " %>
+                </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted" style="margin-top: 1rem;">No users invited yet.</p>
+    <% end %>
+  </section>
+<% end %>
+
+<section class="attendees-list" aria-label="Attendees">
+  <h2>Attendees</h2>
+  <% if @event.attendees.any? %>
+    <% @event.attendees.each do |attendee| %>
+      <div class="attendee-item" role="listitem" aria-label="Attendee">
+        <div class="attendee-avatar" aria-hidden="true"> <%= attendee.email[0].upcase %></div>
+        <div class="attendee-info">
+          <div class="attendee-name"><%= attendee.email %></div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="muted">No attendees yet.</p>
+  <% end %>
+</section>

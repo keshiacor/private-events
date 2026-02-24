@@ -53,10 +53,34 @@ Visit `http://localhost:3000` and sign up for an account to start creating event
 ## Features
 
 - Users can create multiple events.
-- Users can attend events.
+- Users can attend events they've created or events they've been invited to.
+- A user can invite other users to their events.
+- A user can only see events they have created or events they are attending.
+- A user can rescind an invitation they have sent to another user.
+- A user can edit or delete an event they have created.
 - An event has multiple attendees.
 - An event has a date and a location displayed as a string.
+- Authentication system for users to sign up and log in using Devise.
+
+## Usage
+
+Events Page
+![event page](readmeassets/events_page.png)
+
+Event creation form
+![new event form](readmeassets/create_event_form.png)
+
+Event details page - invitee's view
+![attendees image](readmeassets/Event_Details.png)
+
+User's my space showing upcoming and past events
+![my space](readmeassets/myspace_event.png)
+
+Event details page - creator's view
+![event details creator view](readmeassets/event_details_creator_view.png)
 
 ## Important Dependencies
 
-TBC
+- Devise – Used for user authentication and management.
+- RSpec – Used for testing the application.
+- Stymulus – Used for styling the application.

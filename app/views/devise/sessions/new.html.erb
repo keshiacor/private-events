@@ -1,0 +1,30 @@
+<div class="form-container" role="region" aria-label="Log in">
+  <h1>Log in</h1>
+
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "auth-form", role: "form", 'aria-label': 'Log in form' }) do |f| %>
+    <div class="form-field">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", 'aria-label': 'Email address' %>
+    </div>
+
+    <div class="form-field">
+      <%= f.label :password %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-input", 'aria-label': 'Password' %>
+    </div>
+
+    <div class="form-field">
+      <label class="checkbox-label">
+        <%= f.check_box :remember_me %>
+        <span class="label-text">Remember me</span>
+      </label>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Log in", class: "form-submit-btn" %>
+    </div>
+  <% end %>
+
+  <div style="text-align:center; margin-top: 0.75rem;">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

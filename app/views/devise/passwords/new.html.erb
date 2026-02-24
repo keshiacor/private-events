@@ -1,0 +1,18 @@
+<div class="form-container" role="region" aria-label="Reset password">
+  <h1>Forgot your password?</h1>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "auth-form", role: "form", 'aria-label': 'Reset password form' }) do |f| %>
+    <div class="form-field">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-input", 'aria-label': 'Email address' %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Send reset instructions", class: "form-submit-btn" %>
+    </div>
+  <% end %>
+
+  <div style="text-align:center; margin-top: 0.75rem;">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>

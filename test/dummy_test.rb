@@ -1,0 +1,1 @@
+# test/dummy_test.rb require "test_helper" class DummyTest < ActiveSupport::TestCase test "placeholder" do assert true event = Event.new(name: "Test Event", date: Date.today, location: "Test Location", creator_id: users(:one).id) end end
