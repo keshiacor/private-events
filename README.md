@@ -62,6 +62,23 @@ Visit `http://localhost:3000` and sign up for an account to start creating event
 - An event has a date and a location displayed as a string.
 - Authentication system for users to sign up and log in using Devise.
 
+## Usage
+
+Events Page
+![event page](readmeassets/events_page.png)
+
+Event creation form
+![new event form](readmeassets/create_event_form.png)
+
+Event details page - invitee's view
+![attendees image](readmeassets/Event_Details.png)
+
+User's my space showing upcoming and past events
+![my space](readmeassets/myspace_event.png)
+
+Event details page - creator's view
+![event details creator view](readmeassets/event_details_creator_view.png)
+
 ## Important Dependencies
 
 - Devise – Used for user authentication and management.
