@@ -6,7 +6,7 @@ Private Events is a Rails application built as part of The Odin Project curricul
 
 ## 🌟 Demo
 
-- Coming soon – once deployed, a live demo link will be added here.
+![EventHaven Demo](https://www.loom.com/share/0138ba1efe364ab9b363e628b960f4b6)
 
 ## Getting Started
 
@@ -52,15 +52,15 @@ Visit `http://localhost:3000` and sign up for an account to start creating event
 
 ## Features
 
-- Users can create multiple events.
-- Users can attend events they've created or events they've been invited to.
-- A user can invite other users to their events.
-- A user can only see events they have created or events they are attending.
+- Users can sign up, log in, and log out using Devise for authentication.
+- Users can create events with a name, description, date, and location.
+- Users can see the list of all upcoming and past events in EventHaven.
+- Users can only access events they have created or events they've been invited to.
+- Users are automatically marked as attending the events they create.
+- A user can invite other users to the events they have created.
 - A user can rescind an invitation they have sent to another user.
-- A user can edit or delete an event they have created.
-- An event has multiple attendees.
-- An event has a date and a location displayed as a string.
-- Authentication system for users to sign up and log in using Devise.
+- A user can edit, update or delete an event they have created.
+- An event can have multiple attendees.
 
 ## Usage
 
