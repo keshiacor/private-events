@@ -1,8 +1,8 @@
-# Private Events
+# EventHaven
 
 ## Description
 
-Private Events is a Rails application built as part of The Odin Project curriculum. The app allows users to create and attend private events much like Eventbrite.
+EventHaven is a Rails application built as part of The Odin Project curriculum. The app allows users to create and attend private events much like Eventbrite.
 
 ## 🌟 Demo
 
@@ -28,10 +28,10 @@ cd private-events
 bundle install
 ```
 
-- Set up the database (create, migrate, and seed if needed)
+- Run the database migrations to set up the database schema
 
 ```bash
-bin/rails db:prepare
+bin/rails db:migrate
 ```
 
 - Start the Rails server
