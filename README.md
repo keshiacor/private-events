@@ -6,7 +6,7 @@ EventHaven is a Rails application built as part of The Odin Project curriculum. 
 
 ## 🌟 Demo
 
-![EventHaven Demo](https://www.loom.com/share/0138ba1efe364ab9b363e628b960f4b6)
+https://www.loom.com/share/0138ba1efe364ab9b363e628b960f4b6
 
 ## Getting Started
 
