@@ -6,6 +6,9 @@ EventHaven is a Rails application built as part of The Odin Project curriculum. 
 
 ## 🌟 Demo
 
+The app is deployed on Render and can be accessed at the following URL: https://private-events-s1ol.onrender.com
+
+Want to see the app in action? Check out this demo video:
 https://www.loom.com/share/0138ba1efe364ab9b363e628b960f4b6
 
 ## Getting Started
