@@ -1,12 +1,15 @@
-# Private Events
+# EventHaven
 
 ## Description
 
-Private Events is a Rails application built as part of The Odin Project curriculum. The app allows users to create and attend private events much like Eventbrite.
+EventHaven is a Rails application built as part of The Odin Project curriculum. The app allows users to create and attend private events much like Eventbrite.
 
 ## 🌟 Demo
 
-- Coming soon – once deployed, a live demo link will be added here.
+The app is deployed on Render and can be accessed at the following URL: https://private-events-s1ol.onrender.com
+
+Want to see the app in action? Check out this demo video:
+https://www.loom.com/share/0138ba1efe364ab9b363e628b960f4b6
 
 ## Getting Started
 
@@ -28,10 +31,10 @@ cd private-events
 bundle install
 ```
 
-- Set up the database (create, migrate, and seed if needed)
+- Run the database migrations to set up the database schema
 
 ```bash
-bin/rails db:prepare
+bin/rails db:migrate
 ```
 
 - Start the Rails server
@@ -52,15 +55,32 @@ Visit `http://localhost:3000` and sign up for an account to start creating event
 
 ## Features
 
-- Users can create multiple events.
-- Users can attend events they've created or events they've been invited to.
-- A user can invite other users to their events.
-- A user can only see events they have created or events they are attending.
+- Users can sign up, log in, and log out using Devise for authentication.
+- Users can create events with a name, description, date, and location.
+- Users can see the list of all upcoming and past events in EventHaven.
+- Users can only access events they have created or events they've been invited to.
+- Users are automatically marked as attending the events they create.
+- A user can invite other users to the events they have created.
 - A user can rescind an invitation they have sent to another user.
-- A user can edit or delete an event they have created.
-- An event has multiple attendees.
-- An event has a date and a location displayed as a string.
-- Authentication system for users to sign up and log in using Devise.
+- A user can edit, update or delete an event they have created.
+- An event can have multiple attendees.
+
+## Usage
+
+Events Page
+![event page](readmeassets/events_page.png)
+
+Event creation form
+![new event form](readmeassets/create_event_form.png)
+
+Event details page - invitee's view
+![attendees image](readmeassets/Event_Details.png)
+
+User's my space showing upcoming and past events
+![my space](readmeassets/myspace_event.png)
+
+Event details page - creator's view
+![event details creator view](readmeassets/event_details_creator_view.png)
 
 ## Important Dependencies
 
