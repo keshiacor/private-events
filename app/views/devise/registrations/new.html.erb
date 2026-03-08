@@ -28,9 +28,7 @@
     </div>
   <% end %>
 
-   <div style="text-align:center; margin-top: 0.75rem;">
-    <%- if devise_mapping.registerable? %>
-      <p><%= link_to "Sign up", new_registration_path(resource_name) %></p>
-    <% end %>
+  <div style="text-align:center; margin-top: 0.75rem;">
+    <p><%= link_to "Log in", new_session_path(resource_name) %></p>
   </div>
 </div>
