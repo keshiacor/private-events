@@ -47,6 +47,17 @@ bin/rails server
 
 Visit `http://localhost:3000` and sign up for an account to start creating events.
 
+## Running Tests
+
+The test suite uses RSpec. Prepare the test database, then run all specs:
+
+```bash
+bin/rails db:test:prepare
+bundle exec rspec
+```
+
+To run a single file, pass its path, for example `bundle exec rspec spec/requests/events_spec.rb`.
+
 ## Technologies
 
 - Ruby on Rails 8.1 – Web framework used to build the application.
@@ -55,16 +66,14 @@ Visit `http://localhost:3000` and sign up for an account to start creating event
 ## Features
 
 - Users can sign up, log in, and log out using Devise for authentication.
-- Users can create events with a name, description, date, and location.
-- Users can only access/click on events they have created or events they've been invited to.
+- Users can create events with a name, date, time, and location.
 - All users can see the list of all events but they can only access events they have created or events they've been invited to as an attendee.
 - Users are automatically marked as attending the events they create.
 - Users can only invite other existing users to events they have created.
 - Users can rescind an invitation they have sent to another user.
 - Users can edit, update or delete an event they have created.
 - An event can have multiple attendees.
-- The event page should separate events into upcoming vs past events. Upcoming events should be listed first, followed by past events.
-- Users are automatically marked as attending events they have created.
+- Events are listed on the events page by upcoming then past.
 - Attendees can see all attendees of an event they are attending.
 
 Out of scope for this project:
@@ -93,3 +102,4 @@ Event details page - creator's view
 
 - Devise – Used for user authentication and management.
 - RSpec – Used for testing the application.
+- Stimulus – JavaScript framework used for the toast notifications.
