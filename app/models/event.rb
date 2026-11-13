@@ -8,8 +8,12 @@ class Event < ApplicationRecord
   validates :location, presence: true
   after_create :add_creator_as_attendee
 
-  scope :past, -> { where("event_date < ?", Date.today && Time.now) }
-  scope :upcoming, -> { where("event_date >= ?", Date.today && Time.now) }
+  scope :past, -> { where("event_date < ?", Time.current) }
+  scope :upcoming, -> { where("event_date >= ?", Time.current) }
+
+  def accessible_by?(user)
+    user.present? && (creator == user || invitations.exists?(user: user))
+  end
 
   private
 

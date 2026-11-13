@@ -9,6 +9,7 @@ class AttendancesController < ApplicationController
     @attendance = current_user.attendances.build(attendance_params)
 
     if @attendance.save
+      @event.invitations.find_by(user: current_user)&.update(status: "accepted")
       redirect_to event_path(@attendance.attended_event), notice: "You've successfully registered for this event!"
     else
       redirect_back fallback_location: events_path, alert: @attendance.errors.full_messages.to_sentence, status: :unprocessable_entity
@@ -32,7 +33,7 @@ class AttendancesController < ApplicationController
   end
 
   def authorize_event_access
-    unless can_access_event?(@event)
+    unless @event.accessible_by?(current_user)
       redirect_to events_path, alert: "You don't have access to this event."
     end
   end
@@ -41,10 +42,6 @@ class AttendancesController < ApplicationController
     if @attendance.attended_event.creator == current_user
       redirect_back fallback_location: events_path, alert: "Event creators cannot cancel their attendance."
     end
-  end
-
-  def can_access_event?(event)
-    event.creator == current_user || event.invited_users.include?(current_user)
   end
 
   def attendance_params
